@@ -3,15 +3,29 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Cliente;
+use App\Form\UsuariosType;
 
 class ClientesController extends AbstractController
 {
-    #[Route('/clientes', name: 'app_clientes')]
-    public function index(Request $request)
+
+    #[Route('/create/usuario', name: 'createUsuario')]
+    public function createUsuario(Request $request, EntityManagerInterface $doctrine)
     {
-        $nombre = $request->request->get('nombre');
+        $form = $this-> createForm(UsuariosType::class);
+        $form->handleRequest($request);
+        if ($form-> isSubmitted() && $form-> isValid()) {
+            $usuario = $form-> getData();
+            $doctrine -> persist($usuario);
+            $doctrine -> flush();
+        }
+        return $this->render('createUsuario.html.twig', 
+        [
+            'UsuarioForm' => $form
+        ]);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,7 +23,7 @@ class Usuario
     private ?string $apellidos = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $población = null;
+    private ?string $poblacion = null;
 
     #[ORM\Column(length: 10)]
     private ?string $categoria = null;
@@ -35,8 +37,16 @@ class Usuario
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $fechaCreacion = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $fechaModificación = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $fechaModificacion = null;
+
+    #[ORM\ManyToMany(targetEntity: Cliente::class, mappedBy: 'users')]
+    private Collection $clientes;
+
+    public function __construct()
+    {
+        $this->clientes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -67,14 +77,14 @@ class Usuario
         return $this;
     }
 
-    public function getPoblación(): ?string
+    public function getPoblacion(): ?string
     {
-        return $this->población;
+        return $this->poblacion;
     }
 
-    public function setPoblación(?string $población): self
+    public function setPoblacion(?string $poblacion): self
     {
-        $this->población = $población;
+        $this->poblacion = $poblacion;
 
         return $this;
     }
@@ -127,14 +137,41 @@ class Usuario
         return $this;
     }
 
-    public function getFechaModificación(): ?\DateTimeInterface
+    public function getFechaModificacion(): ?\DateTimeInterface
     {
-        return $this->fechaModificación;
+        return $this->fechaModificacion;
     }
 
-    public function setFechaModificación(\DateTimeInterface $fechaModificación): self
+    public function setFechaModificacion(\DateTimeInterface $fechaModificacion): self
     {
-        $this->fechaModificación = $fechaModificación;
+        $this->fechaModificacion = $fechaModificacion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cliente>
+     */
+    public function getClientes(): Collection
+    {
+        return $this->clientes;
+    }
+
+    public function addCliente(Cliente $cliente): self
+    {
+        if (!$this->clientes->contains($cliente)) {
+            $this->clientes->add($cliente);
+            $cliente->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCliente(Cliente $cliente): self
+    {
+        if ($this->clientes->removeElement($cliente)) {
+            $cliente->removeUser($this);
+        }
 
         return $this;
     }

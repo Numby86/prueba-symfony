@@ -3,3 +3,23 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+clientes:
+    path: /clientes
+    controller: App\Controller\ClientesController::index
+    methods: GET
+
+cliente_new:
+    path: /clientes/new
+    controller: App\Controller\ClientesController::new
+    methods: POST
+
+cliente_edit:
+    path: /clientes/{id}/edit
+    controller: App\Controller\ClientesController::edit
+    methods: PUT
+
+cliente_delete:
+    path: /clientes/{id}/delete
+    controller: App\Controller\ClientesController::delete
+    methods: DELETE

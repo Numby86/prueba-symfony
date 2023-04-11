@@ -12,6 +12,11 @@ use App\Form\UsuariosType;
 
 class ClientesController extends AbstractController
 {
+    #[Route('/inicio', name: 'inicio')]
+    public function inicio(Request $request, EntityManagerInterface $doctrine)
+    {
+        return $this->render('inicio.html.twig');
+    }
 
     #[Route('/create/usuario', name: 'createUsuario')]
     public function createUsuario(Request $request, EntityManagerInterface $doctrine)
@@ -22,6 +27,8 @@ class ClientesController extends AbstractController
             $usuario = $form-> getData();
             $doctrine -> persist($usuario);
             $doctrine -> flush();
+            $this-> addFlash('succes', 'Usuario creado correctamente');
+            return $this-> redirectToRoute('inicio');
         }
         return $this->render('createUsuario.html.twig', 
         [

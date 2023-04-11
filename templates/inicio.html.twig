@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {% for mensaje in app.flashes('succes') %}
+            <p>{{ mensaje }}</p>
+        {% endfor %}
+        <div>
+            <h2>PAGINA INICIO CLIENTES</h2>
+        </div>
+    {% endblock %}

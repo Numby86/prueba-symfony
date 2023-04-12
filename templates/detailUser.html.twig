@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        <div>
+            <h2>{{ user.nombre }} {{ user.apellidos }}</h2>
+            <p>{{ user.edad }} años</p>
+            <p>{{ user.poblacion }}</p>
+            <p>Categoria: {{ user.categoria }}</p>
+        </div>
+        <a href="{{ path('usuarios') }}">Volver</a>
+    {% endblock %}

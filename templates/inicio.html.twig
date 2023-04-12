@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
     {% block body %}
-        {% for mensaje in app.flashes('succes') %}
+        {% for mensaje in app.flashes('success') %}
             <p>{{ mensaje }}</p>
         {% endfor %}
         <div>
             <h2>PAGINA INICIO CLIENTES</h2>
+            <a href="{{ path('newUser') }}">Registro</a>
+            <a href="{{ path('newUser') }}">Login</a>
         </div>
     {% endblock %}

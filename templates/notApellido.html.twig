@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {% for usuario in notApellido %}
+            <div>
+                <div style="width: 18rem;">
+                    <div>
+                        <h5>ID: {{ usuario.id }}, Nombre completo: {{ usuario.nombre }} {{ usuario.apellidos }}</h5>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}

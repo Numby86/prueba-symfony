@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {% for usuario in cateY %}
+            <div>
+                <div style="width: 18rem;">
+                    <div>
+                        <h5>ID: {{ usuario.id }}, Nombre completo: {{ usuario.nombre }} {{ usuario.apellidos }}, Categoria: {{ usuario.categoria }}</h5>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}

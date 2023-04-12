@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {% for mensaje in app.flashes('success') %}
+            <p>{{ mensaje }}</p>
+        {% endfor %}
+        <h2>USUARIOS</h2>
+        {% for usuario in usuarios %}
+            <div class="col mb-4">
+                <div class="card  myCard" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">ID: {{ usuario.id }}, Nombre completo: {{ usuario.nombre }} {{ usuario.apellidos }}</h5>
+                        <a href="{{ path('detailUser', {id:usuario.id}) }}">Detalle</a>
+                        {# {% if is_granted('ROLE_ADMIN') %} #}
+                        <a href="{{ path('editUsuario', {id:usuario.id}) }}">Editar</a>
+                        <a href="{{ path('deleteUsuario', {id:usuario.id}) }}">Borrar</a>
+                        {# {% endif %} #}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}

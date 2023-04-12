@@ -2,8 +2,11 @@
     {% block body %}
         <div>
             <h2>{{ user.nombre }} {{ user.apellidos }}</h2>
+            <br>
             <p>{{ user.edad }} años</p>
+            <br>
             <p>{{ user.poblacion }}</p>
+            <br>
             <p>Categoria: {{ user.categoria }}</p>
         </div>
         <a href="{{ path('usuarios') }}">Volver</a>

@@ -6,6 +6,13 @@
         <div>
             <h2>PAGINA INICIO CLIENTES</h2>
             <a href="{{ path('newUser') }}">Registro</a>
-            <a href="{{ path('newUser') }}">Login</a>
+        </div>
+        <div>
+            <h2>METODOS DE FILTRADO</h2>
+            <a href="{{ path('userEdades') }}">Rango edades entre 20 y 50 años</a>
+            <br>
+            <a href="{{ path('cateY') }}">Categoria Y</a>
+            <br>
+            <a href="{{ path('notApellido') }}">No se apellida Núñez Sánchez</a>
         </div>
     {% endblock %}
